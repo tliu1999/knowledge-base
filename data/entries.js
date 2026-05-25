@@ -82,5 +82,12 @@ window.KB_ENTRIES = [
     tags: ["github", "gh", "cli"],
     body: "如果安装了 GitHub CLI，可以直接在终端创建和查看 PR。",
     code: "gh auth login\ngh repo clone USER/REPO\ngh pr create --fill\ngh pr list\ngh pr view --web\ngh pr checks"
+  },
+  {
+    title: "把 Public GitHub 项目发布成网页",
+    category: "GitHub / Git",
+    tags: ["github", "pages", "public", "网页", "部署"],
+    body: "Public 仓库里的静态页面可以用 GitHub Pages 发布，别人就能通过网址直接访问网页，而不只是看代码。",
+    code: "1. 打开 GitHub 仓库页面\n2. 确认仓库是 Public：Settings -> General -> Danger Zone -> Change visibility\n3. 进入 Settings -> Pages\n4. Source 选择 Deploy from a branch\n5. Branch 选择 main，Folder 选择 / root\n6. 点击 Save\n7. 等待几十秒到几分钟\n8. 访问 https://USERNAME.github.io/REPO/\n\n示例：\nhttps://tliu1999.github.io/knowledge-base/\n\n以后更新网页：\ngit add .\ngit commit -m \"Update knowledge base\"\ngit push"
   }
 ];
