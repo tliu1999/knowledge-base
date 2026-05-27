@@ -145,17 +145,36 @@ async function copyEntry(entry, button) {
   }, 900);
 }
 
+function createPlaceholderCard() {
+  const placeholder = document.createElement("article");
+  placeholder.className = "entry-card entry-card-placeholder";
+  placeholder.innerHTML = `
+    <p class="entry-category">继续更新中</p>
+    <h3>新的思考正在补充</h3>
+    <p class="entry-body">这里会继续沉淀更多问题、回答和复盘。先把真实想法写下来，再慢慢补充经历、反例和判断依据。</p>
+    <div class="entry-tags">
+      <span>草稿</span>
+      <span>待补充</span>
+    </div>
+  `;
+  return placeholder;
+}
+
 function renderEntries(entries) {
   entriesEl.replaceChildren();
-  let compactEntryCount = 0;
+  let compactEntriesInRow = 0;
 
   for (const entry of entries) {
     const node = template.content.cloneNode(true);
     const card = node.querySelector(".entry-card");
     if (isWideEntry(entry)) {
+      if (compactEntriesInRow === 1) {
+        entriesEl.appendChild(createPlaceholderCard());
+        compactEntriesInRow = 0;
+      }
       card.classList.add("entry-card-wide");
     } else {
-      compactEntryCount += 1;
+      compactEntriesInRow = (compactEntriesInRow + 1) % 2;
     }
 
     node.querySelector(".entry-category").textContent = entry.category;
@@ -183,19 +202,8 @@ function renderEntries(entries) {
     entriesEl.appendChild(node);
   }
 
-  if (compactEntryCount % 2 === 1) {
-    const placeholder = document.createElement("article");
-    placeholder.className = "entry-card entry-card-placeholder";
-    placeholder.innerHTML = `
-      <p class="entry-category">继续更新中</p>
-      <h3>新的思考正在补充</h3>
-      <p class="entry-body">这里会继续沉淀更多问题、回答和复盘。先把真实想法写下来，再慢慢补充经历、反例和判断依据。</p>
-      <div class="entry-tags">
-        <span>草稿</span>
-        <span>待补充</span>
-      </div>
-    `;
-    entriesEl.appendChild(placeholder);
+  if (compactEntriesInRow === 1) {
+    entriesEl.appendChild(createPlaceholderCard());
   }
 }
 
