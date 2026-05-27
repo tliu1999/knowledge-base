@@ -3,17 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>个人知识库</title>
+    <title>思考库</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/knowledge-mark.svg" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="app-shell">
-      <aside class="sidebar" aria-label="知识库导航">
+      <aside class="sidebar" aria-label="思考库导航">
         <div class="brand-row">
           <img src="./assets/knowledge-mark.svg" alt="" class="brand-mark" />
           <div>
-            <h1>个人知识库</h1>
-            <p>常用问题速查</p>
+            <h1>思考库</h1>
+            <p>这是我的突发奇想，借助Codex帮我记录下来了，愿意的话也可以加入你的呢</p>
           </div>
         </div>
 
@@ -21,7 +22,7 @@
           <label for="searchInput">检索</label>
           <div class="search-wrap">
             <span aria-hidden="true">⌕</span>
-            <input id="searchInput" type="search" placeholder="搜索快捷键、git commit、截图..." autocomplete="off" />
+            <input id="searchInput" type="search" placeholder="搜索党员角色、产品经理、AI..." autocomplete="off" />
           </div>
         </section>
 
@@ -36,10 +37,10 @@
         </section>
       </aside>
 
-      <section class="workspace" aria-label="知识库内容">
+      <section class="workspace" aria-label="思考库内容">
         <div class="toolbar">
           <div>
-            <p class="eyebrow">Knowledge Base</p>
+            <p class="eyebrow">Thinking Library</p>
             <h2 id="resultTitle">全部条目</h2>
           </div>
           <div class="stats" aria-live="polite">
@@ -51,12 +52,17 @@
         <form id="quickAddForm" class="quick-add" autocomplete="off">
           <div class="form-grid">
             <label>
-              标题
-              <input name="title" required placeholder="例如：查看当前 Git 分支" />
+              问题 / 标题
+              <input name="title" required placeholder="写下你正在思考的问题" />
             </label>
             <label>
               分类
               <select name="category" required>
+                <option value="自我复盘">自我复盘</option>
+                <option value="产品思考">产品思考</option>
+                <option value="AI 时代">AI 时代</option>
+                <option value="党员角色">党员角色</option>
+                <option value="面试题库">面试题库</option>
                 <option value="Mac">Mac</option>
                 <option value="GitHub / Git">GitHub / Git</option>
                 <option value="Shell">Shell</option>
@@ -65,17 +71,18 @@
             </label>
             <label>
               标签
-              <input name="tags" placeholder="用逗号分隔，例如 git, branch" />
+              <input name="tags" placeholder="用逗号分隔，例如 成长, 判断力, 责任" />
             </label>
           </div>
           <label>
-            内容
-            <textarea name="body" required placeholder="记录命令、快捷键、使用场景或注意事项"></textarea>
+            核心想法
+            <textarea name="body" required placeholder="写下你的想法，也可以先留一句“还在思考中”"></textarea>
           </label>
           <div class="form-actions">
-            <button type="submit">添加到本机知识库</button>
-            <button type="button" id="clearLocalBtn" class="ghost">清空本机新增</button>
+            <button type="submit">提交给我审核</button>
+            <button type="button" id="clearLocalBtn" class="ghost">清空我新增的思考</button>
           </div>
+          <p class="form-hint">提交后会打开 GitHub Issue 页面，我审核后再加入正式思考库；你的浏览器里也会先保存一份。</p>
         </form>
 
         <div id="entries" class="entry-list"></div>
@@ -90,7 +97,7 @@
             <p class="entry-category"></p>
             <h3></h3>
           </div>
-          <button class="copy-btn" type="button" title="复制内容" aria-label="复制内容">⧉</button>
+          <button class="copy-btn" type="button" title="复制条目" aria-label="复制条目">⧉</button>
         </div>
         <p class="entry-body"></p>
         <pre class="entry-code" hidden><code></code></pre>
